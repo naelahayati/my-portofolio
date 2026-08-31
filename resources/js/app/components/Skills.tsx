@@ -1,167 +1,276 @@
-import { motion } from 'motion/react';
-import { Code2, Database, Sparkles, Star } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { 
+  Code2, Database, Sparkles, Star, Layers, Palette, Terminal, 
+  CheckCircle2, Cpu, Wrench, ShieldAlert
+} from 'lucide-react';
+import { useState } from 'react';
 
 export function Skills() {
-  const skillCategories = [
+  const [activeTab, setActiveTab] = useState<string>('all');
+
+  const categories = [
+    { id: 'all', label: 'Semua Keahlian' },
+    { id: 'analysis', label: 'Analisis Sistem' },
+    { id: 'web', label: 'Pengembangan Web' },
+    { id: 'design', label: 'Desain UI/UX & Tools' },
+  ];
+
+  const skillData = [
     {
-      category: 'System Analysis',
+      category: 'analysis',
+      name: 'UML (Use Case, Sequence, Activity)',
+      level: 92,
+      badge: 'Expert',
+      icon: Layers,
+      color: 'from-sky-500 to-blue-600',
+      description: 'Pemodelan dokumentasi fungsionalitas & interaksi komponen sistem.',
+    },
+    {
+      category: 'analysis',
+      name: 'Flowchart & Business Process',
+      level: 95,
+      badge: 'Master',
+      icon: Terminal,
+      color: 'from-blue-600 to-indigo-600',
+      description: 'Perancangan alur kerja bisnis secara menyeluruh dan akurat.',
+    },
+    {
+      category: 'analysis',
+      name: 'ERD & Database Modeling',
+      level: 90,
+      badge: 'Expert',
       icon: Database,
-      skills: [
-        { name: 'UML', level: 90 },
-        { name: 'Flowchart', level: 95 },
-        { name: 'ERD', level: 89 },
-        { name: 'StarUML', level: 85 },
-        { name: 'Draw.io', level: 90 }
-      ],
-      color: 'from-blue-600 to-blue-400',
-      bgColor: 'bg-blue-600',
+      color: 'from-indigo-500 to-purple-600',
+      description: 'Perancangan skema relasi antar entitas & normalisasi database.',
     },
     {
-      category: 'Development',
+      category: 'analysis',
+      name: 'StarUML & Draw.io',
+      level: 88,
+      badge: 'Advanced',
+      icon: Wrench,
+      color: 'from-cyan-500 to-sky-600',
+      description: 'Alat perancangan diagram teknis dan dokumentasi perangkat lunak.',
+    },
+    {
+      category: 'web',
+      name: 'Laravel Framework',
+      level: 88,
+      badge: 'Advanced',
       icon: Code2,
-      skills: [
-        { name: 'Laravel', level: 85 },
-        { name: 'PHP', level: 88 },
-        { name: 'MySQL', level: 82 },
-        { name: 'Tailwind CSS', level: 80 },
-        { name: 'Bootstrap', level: 81},
-      ],
-      color: 'from-primary via-secondary to-accent',
-      bgColor: 'bg-primary',
+      color: 'from-rose-500 to-red-600',
+      description: 'Pengembangan arsitektur backend MVC, Eloquent ORM & RESTful API.',
     },
     {
-      category: 'Design & Tools',
+      category: 'web',
+      name: 'PHP & MySQL',
+      level: 90,
+      badge: 'Expert',
+      icon: Database,
+      color: 'from-indigo-500 to-sky-600',
+      description: 'Pemrograman backend server-side & manipulasi query basis data.',
+    },
+    {
+      category: 'web',
+      name: 'Tailwind CSS & Bootstrap',
+      level: 86,
+      badge: 'Advanced',
+      icon: Palette,
+      color: 'from-sky-400 to-indigo-500',
+      description: 'Perancangan layout antarmuka yang responsif, elegan & fluid.',
+    },
+    {
+      category: 'web',
+      name: 'VBA Excel Automation',
+      level: 85,
+      badge: 'Advanced',
+      icon: Cpu,
+      color: 'from-emerald-500 to-teal-600',
+      description: 'Otomatisasi pemrosesan data & pelaporan bisnis berbasis spreadsheet.',
+    },
+    {
+      category: 'design',
+      name: 'Figma Prototyping',
+      level: 92,
+      badge: 'Expert',
       icon: Sparkles,
-      skills: [
-        { name: 'Figma', level: 88 },
-        { name: 'UI/UX Design', level: 88 },
-        { name: 'Visual Hierarchy', level: 70 },
-        { name: 'Prototyping', level: 82 },
-      ],
-      color: 'from-pink-500 to-rose-400',
-      bgColor: 'bg-pink-500',
+      color: 'from-pink-500 to-rose-500',
+      description: 'Perancangan wireframe high-fidelity & desain sistem interaktif.',
+    },
+    {
+      category: 'design',
+      name: 'UI/UX & User Centric Design',
+      level: 90,
+      badge: 'Expert',
+      icon: Palette,
+      color: 'from-purple-500 to-pink-500',
+      description: 'Penerapan konsistensi visual, aksesibilitas, & kemudahan interaksi.',
+    },
+    {
+      category: 'design',
+      name: 'Visual Hierarchy & Layout',
+      level: 85,
+      badge: 'Advanced',
+      icon: Layers,
+      color: 'from-violet-500 to-indigo-500',
+      description: 'Penataan elemen visual yang estetik, rapi, dan mudah dibaca.',
     },
   ];
 
+  const softSkills = [
+    'Analisis Masalah Logis',
+    'Komunikasi Teknis',
+    'Kolaborasi Tim Agile',
+    'Manajemen Waktu & Target',
+    'Ketelitian Data & Detail',
+    'Adaptabilitas Teknologi Baru'
+  ];
+
+  const filteredSkills = activeTab === 'all' 
+    ? skillData 
+    : skillData.filter(s => s.category === activeTab);
+
   return (
-    <section id="skills" className="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden">
-      {/* Animated Background Pattern */}
-      <div className="absolute inset-0 opacity-20">
+    <section id="skills" className="relative min-h-screen flex items-center justify-center px-4 md:px-6 py-24 overflow-hidden">
+      {/* Background Dot Grid */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle, #93C5FD 1px, transparent 1px)',
-          backgroundSize: '40px 40px'
-        }}></div>
+          backgroundImage: 'radial-gradient(circle, #38BDF8 1px, transparent 1px)',
+          backgroundSize: '36px 36px'
+        }} />
       </div>
 
-      {/* Floating Shapes */}
-      <motion.div
-        className="absolute top-20 right-10 w-32 h-32 border-4 border-secondary/30 rounded-full"
-        animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="absolute bottom-20 left-10 w-24 h-24 border-4 border-accent/30 rounded-lg"
-        animate={{ rotate: -360, scale: [1, 1.3, 1] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-      />
-
       <div className="max-w-6xl mx-auto w-full relative z-10">
+        {/* Section Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
+          className="text-center mb-12"
         >
-          <motion.h2
-            className="text-center mb-4 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
-            initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            Skills & Expertise
-          </motion.h2>
-          <motion.div
-            className="w-20 h-1 bg-gradient-to-r from-secondary to-accent mx-auto mb-4 rounded-full"
-            initial={{ width: 0 }}
-            whileInView={{ width: 80 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          ></motion.div>
+          <span className="text-xs uppercase font-extrabold tracking-widest text-sky-500 bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20 inline-flex items-center gap-1.5 mb-3">
+            <Cpu size={12} /> Tech Stack & Tools
+          </span>
+          <h2 className="text-3xl md:text-5xl font-black bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            Keahlian & Kemahiran
+          </h2>
+          <div className="w-20 h-1.5 bg-gradient-to-r from-secondary to-accent mx-auto mt-4 rounded-full" />
+          <p className="text-muted-foreground mt-4 max-w-xl mx-auto text-sm md:text-base">
+            Kombinasi kemampuan rekayasa sistem, pengembangan web, serta keahlian desain UI/UX.
+          </p>
+        </motion.div>
 
-          <motion.p
-            className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            Teknologi dan tools yang saya kuasai untuk membangun solusi digital yang modern
-          </motion.p>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {skillCategories.map((category, categoryIndex) => (
-              <motion.div
-                key={categoryIndex}
-                initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.6, delay: categoryIndex * 0.15 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="bg-gradient-to-br from-card to-card/50 border border-border rounded-3xl p-8 shadow-xl hover:shadow-2xl hover:shadow-secondary/20 transition-all relative overflow-hidden group"
-              >
-                {/* Gradient Background Effect */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-
-                {/* Header */}
-                <div className="flex items-center gap-4 mb-8 relative z-10">
-                  <motion.div
-                    className={`w-14 h-14 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center shadow-lg`}
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <category.icon className="text-white" size={28} />
-                  </motion.div>
-                  <h3 className="bg-gradient-to-r ${category.color} bg-clip-text">{category.category}</h3>
-                </div>
-
-                {/* Skills with Progress Bars */}
-                <div className="space-y-5 relative z-10">
-                  {category.skills.map((skill, skillIndex) => (
+        {/* Ultra-Modern Segmented Glass Tab Control */}
+        <div className="flex justify-center mb-14 px-2">
+          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 p-2 rounded-full bg-slate-900/10 dark:bg-slate-900/80 backdrop-blur-xl border border-secondary/20 dark:border-white/10 shadow-xl">
+            {categories.map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`relative px-5 py-2.5 rounded-full text-xs md:text-sm font-bold transition-all duration-300 flex items-center gap-2 outline-none group cursor-pointer ${
+                    isActive
+                      ? 'text-white'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary/10 dark:hover:bg-white/5'
+                  }`}
+                >
+                  {isActive && (
                     <motion.div
-                      key={skillIndex}
-                      initial={{ opacity: 0, x: -30 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: categoryIndex * 0.15 + skillIndex * 0.08 }}
-                      viewport={{ once: true }}
+                      layoutId="activeSkillSegment"
+                      className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-accent rounded-full shadow-lg shadow-secondary/25 -z-10"
+                      transition={{ type: 'spring', stiffness: 450, damping: 30 }}
                     >
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-foreground flex items-center gap-2">
-                          <Star size={12} className="text-accent fill-accent" />
-                          {skill.name}
-                        </span>
-                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
-                      </div>
-                      <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
-                        <motion.div
-                          className={`h-full bg-gradient-to-r ${category.color} rounded-full`}
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          transition={{ duration: 1, delay: categoryIndex * 0.15 + skillIndex * 0.08 + 0.3, ease: "easeOut" }}
-                          viewport={{ once: true }}
-                        />
-                      </div>
+                      <div className="absolute inset-0 rounded-full bg-white/20 blur-xs" />
                     </motion.div>
-                  ))}
+                  )}
+                  {tab.id === 'all' && <Sparkles size={14} className={isActive ? 'text-yellow-300' : 'text-pink-400'} />}
+                  {tab.id === 'analysis' && <Layers size={14} className={isActive ? 'text-white' : 'text-sky-400'} />}
+                  {tab.id === 'web' && <Code2 size={14} className={isActive ? 'text-white' : 'text-indigo-400'} />}
+                  {tab.id === 'design' && <Palette size={14} className={isActive ? 'text-white' : 'text-pink-400'} />}
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Skills Grid */}
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
+          layout
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredSkills.map((skill, index) => (
+              <motion.div
+                key={skill.name}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                whileHover={{ y: -6 }}
+                className="bg-card border border-border rounded-3xl p-6 shadow-md hover:shadow-xl hover:shadow-secondary/15 transition-all relative overflow-hidden group flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <div className={`w-11 h-11 bg-gradient-to-br ${skill.color} rounded-2xl flex items-center justify-center text-white shadow-md`}>
+                      <skill.icon size={22} />
+                    </div>
+                    <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-secondary/10 text-secondary border border-secondary/20">
+                      {skill.badge}
+                    </span>
+                  </div>
+
+                  <h3 className="font-bold text-base text-foreground mb-1">{skill.name}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-6">
+                    {skill.description}
+                  </p>
                 </div>
 
-                {/* Decorative Elements */}
-                <motion.div
-                  className={`absolute -bottom-8 -right-8 w-32 h-32 ${category.bgColor} rounded-full blur-3xl opacity-20`}
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                />
+                {/* Progress bar */}
+                <div>
+                  <div className="flex justify-between items-center text-xs font-bold mb-1.5">
+                    <span className="text-muted-foreground">Kemahiran</span>
+                    <span className="text-foreground">{skill.level}%</span>
+                  </div>
+                  <div className="h-2 w-full bg-muted rounded-full overflow-hidden p-0.5">
+                    <motion.div
+                      className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${skill.level}%` }}
+                      transition={{ duration: 1, ease: "easeOut" }}
+                      viewport={{ once: true }}
+                    />
+                  </div>
+                </div>
               </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Soft Skills Pill Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="bg-card border border-border rounded-3xl p-8 text-center shadow-lg"
+        >
+          <h3 className="text-lg font-bold mb-4 flex items-center justify-center gap-2">
+            <CheckCircle2 size={20} className="text-emerald-500" />
+            <span>Kompetensi & Nilai Tambah</span>
+          </h3>
+          <div className="flex flex-wrap justify-center gap-3">
+            {softSkills.map((soft, i) => (
+              <span 
+                key={i}
+                className="px-4 py-2 rounded-full bg-muted/60 text-foreground text-xs font-bold border border-border/80 flex items-center gap-1.5 hover:border-accent/40 transition-colors"
+              >
+                <Sparkles size={12} className="text-pink-400" />
+                {soft}
+              </span>
             ))}
           </div>
         </motion.div>
