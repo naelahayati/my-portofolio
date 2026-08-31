@@ -9,13 +9,15 @@ export function Modeling() {
   const [selectedModel, setSelectedModel] = useState<any>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  const base = import.meta.env.BASE_URL;
+
   const models = [
     {
       id: 'erd',
       title: 'Entity Relationship Diagram (ERD)',
       category: 'Database Architecture',
       description: 'Perancangan struktur basis data terelasi yang optimal untuk menjamin integritas data, efisiensi query SQL, serta pencegahan redundansi data melalui normalisasi logis.',
-      image: ['/images/modeling/erd.png', '/images/modeling/erd2.jpeg'],
+      image: [`${base}images/modeling/erd.png`, `${base}images/modeling/erd2.jpeg`],
       icon: Database,
       gradient: 'from-sky-500 to-indigo-600',
       specs: [
@@ -32,8 +34,8 @@ export function Modeling() {
       category: 'Process Logic Mapping',
       description: 'Pemetaan alur kerja sistem secara detail untuk memvisualisasikan proses bisnis dari input data, validasi logika, pengolahan sistem, hingga pembentukan laporan akhir.',
       image: [
-        '/images/modeling/flowchart.png', '/images/modeling/flowchart2.png', 
-        '/images/modeling/flowchart3.png', '/images/modeling/flowchart4.png'
+        `${base}images/modeling/flowchart.png`, `${base}images/modeling/flowchart2.png`, 
+        `${base}images/modeling/flowchart3.png`, `${base}images/modeling/flowchart4.png`
       ],
       icon: GitGraph,
       gradient: 'from-amber-500 to-rose-600',
@@ -50,7 +52,7 @@ export function Modeling() {
       title: 'Use Case Diagram',
       category: 'Functional Specification',
       description: 'Definisi interaksi antara aktor (Pengguna, Admin, Kasir) dengan sistem untuk mendokumentasikan batasan fungsionalitas utama yang wajib disediakan aplikasi.',
-      image: ['/images/modeling/usecase.png'],
+      image: [`${base}images/modeling/usecase.png`],
       icon: Users,
       gradient: 'from-purple-500 to-pink-500',
       specs: [

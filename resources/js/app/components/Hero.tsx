@@ -142,7 +142,7 @@ export function Hero() {
             <div className="relative w-full h-full rounded-full p-1.5 bg-gradient-to-br from-primary via-secondary to-accent shadow-2xl overflow-hidden group">
               <div className="w-full h-full rounded-full bg-white dark:bg-slate-900 flex items-center justify-center overflow-hidden border-4 border-white/80 dark:border-slate-800 relative">
                 <img
-                  src="/profil.png"
+                  src={`${import.meta.env.BASE_URL}profil.png`}
                   alt="Naela Hayati - UI/UX Designer"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -249,7 +249,7 @@ export function Hero() {
           </motion.a>
 
           <motion.a
-            href="/cv_naela_hayati.pdf" // Placeholder link to CV
+            href={`${import.meta.env.BASE_URL}cv_naela_hayati.pdf`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-muted/50 text-foreground border-2 border-border dark:border-white/10 rounded-full font-bold shadow-sm hover:border-primary hover:text-primary transition-all cursor-pointer"

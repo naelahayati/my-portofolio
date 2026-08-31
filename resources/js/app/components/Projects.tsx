@@ -11,6 +11,8 @@ export function Projects() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [likedProjects, setLikedProjects] = useState<Record<number, boolean>>({});
 
+  const base = import.meta.env.BASE_URL;
+
   const projects = [
     {
       id: 1,
@@ -25,9 +27,9 @@ export function Projects() {
       ],
       tags: ['PHP', 'Laravel', 'Bootstrap', 'JavaScript', 'MySQL', 'Midtrans'],
       image: [
-        '/images/projects/3/1.png', '/images/projects/3/2.png', '/images/projects/3/3.png', 
-        '/images/projects/3/4.png', '/images/projects/3/5.png', '/images/projects/3/6.png', 
-        '/images/projects/3/7.png', '/images/projects/3/8.png'
+        `${base}images/projects/3/1.png`, `${base}images/projects/3/2.png`, `${base}images/projects/3/3.png`, 
+        `${base}images/projects/3/4.png`, `${base}images/projects/3/5.png`, `${base}images/projects/3/6.png`, 
+        `${base}images/projects/3/7.png`, `${base}images/projects/3/8.png`
       ],
       gradient: 'from-emerald-500 to-teal-700',
       icon: Sparkles,
@@ -47,9 +49,9 @@ export function Projects() {
       ],
       tags: ['PHP', 'MySQL', 'Bootstrap', 'JavaScript', 'CSS', 'HTML'],
       image: [
-        '/images/projects/2/a1.png', '/images/projects/2/a2.png', '/images/projects/2/a3.png', 
-        '/images/projects/2/a4.png', '/images/projects/2/a5.png', '/images/projects/2/a6.png', 
-        '/images/projects/2/a7.png', '/images/projects/2/a8.png'
+        `${base}images/projects/2/a1.png`, `${base}images/projects/2/a2.png`, `${base}images/projects/2/a3.png`, 
+        `${base}images/projects/2/a4.png`, `${base}images/projects/2/a5.png`, `${base}images/projects/2/a6.png`, 
+        `${base}images/projects/2/a7.png`, `${base}images/projects/2/a8.png`
       ],
       gradient: 'from-amber-500 to-red-600',
       icon: ShoppingCart,
@@ -68,10 +70,10 @@ export function Projects() {
       ],
       tags: ['VBA Excel', 'Data Analysis', 'Automation', 'Spreadsheet'],
       image: [
-        '/images/projects/1/11.png', '/images/projects/1/00.png', '/images/projects/1/22.png', 
-        '/images/projects/1/33.png', '/images/projects/1/44.png', '/images/projects/1/55.png', 
-        '/images/projects/1/66.png', '/images/projects/1/77.png', '/images/projects/1/88.png', 
-        '/images/projects/1/99.png', '/images/projects/1/a11.png', '/images/projects/1/a22.png'
+        `${base}images/projects/1/11.png`, `${base}images/projects/1/00.png`, `${base}images/projects/1/22.png`, 
+        `${base}images/projects/1/33.png`, `${base}images/projects/1/44.png`, `${base}images/projects/1/55.png`, 
+        `${base}images/projects/1/66.png`, `${base}images/projects/1/77.png`, `${base}images/projects/1/88.png`, 
+        `${base}images/projects/1/99.png`, `${base}images/projects/1/a11.png`, `${base}images/projects/1/a22.png`
       ],
       gradient: 'from-indigo-600 to-purple-600',
       icon: CheckSquare,

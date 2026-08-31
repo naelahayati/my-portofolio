@@ -16,6 +16,7 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig({
+    base: '/my-portofolio/',
     plugins: [
         react(),
         tailwindcss(),
